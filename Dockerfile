@@ -5,6 +5,10 @@ RUN apt-get update && \
     apt-get -y install apache2 php5 php5-mssql && \
     apt-get -y autoremove && \
     apt-get clean && \
+		sed -i -e "s/^error_reporting\s*=.*/error_reporting = E_ALL/g" /etc/php5/apache2/php.ini /etc/php5/fpm/php.ini && \
+ 		sed -i -e "s/^display_errors\s*=.*/display_errors = On/g" /etc/php5/apache2/php.ini /etc/php5/fpm/php.ini && \
+ 		sed -i -e "s/^display_startup_errors\s*=.*/display_startup_errors = On/g" /etc/php5/apache2/php.ini /etc/php5/fpm/php.ini && \
+ 		sed -i -e "s/^;*error_log\s*=\s*syslog/;#error_log = syslog/g" /etc/php5/apache2/php.ini /etc/php5/fpm/php.ini && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN /usr/sbin/a2enmod rewrite

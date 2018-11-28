@@ -13,14 +13,14 @@ docker build -t lectorrss/docker-mssql-php5 .
 
 ### Lanzar servidor
 ```bash
-docker run -d -p 80:80 lectorrss/docker-mssql-php5
+docker run -d -p 8084:80 lectorrss/docker-mssql-php5
 ```
-With custom `www` folder:
+Usar una carpeta personalizada
 ```bash
-docker run -d -p 80:80 -v ruta_repo_local:/var/www/ lectorrss/docker-mssql-php5
+docker run -d -p 8084:80 -v ruta_repo_local:/var/www/ lectorrss/docker-mssql-php5
 ```
 
-# Other
+# s
 Descomenta estas lineas en el Archivo Docker para reparar errores con el UT8 de texto o tiempo:
 ```bash
 ADD freetds.conf /etc/freetds/
