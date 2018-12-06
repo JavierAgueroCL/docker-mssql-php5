@@ -20,7 +20,17 @@ Usar una carpeta personalizada
 docker run -d -p 8084:80 -v ruta_repo_local:/var/www/ lectorrss/docker-mssql-php5
 ```
 
-# s
+### Ver contenedor activo
+```bash
+docker ps
+```
+
+### Conectare al servidor
+```bash
+docker exec -it <container name> /bin/bash
+```
+
+# Otros
 Descomenta estas lineas en el Archivo Docker para reparar errores con el UT8 de texto o tiempo:
 ```bash
 ADD freetds.conf /etc/freetds/

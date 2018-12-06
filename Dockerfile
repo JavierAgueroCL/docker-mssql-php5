@@ -1,27 +1,29 @@
-FROM ppoffice/mssql-odbc
-MAINTAINER PPOffice <ppoffice_2008@163.com>
+FROM ubuntu:16.04
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && \
-    apt-get -y install apache2 php5 php5-mssql && \
-    apt-get -y autoremove && \
-    apt-get clean && \
-		sed -i -e "s/^error_reporting\s*=.*/error_reporting = E_ALL/g" /etc/php5/apache2/php.ini /etc/php5/fpm/php.ini && \
- 		sed -i -e "s/^display_errors\s*=.*/display_errors = On/g" /etc/php5/apache2/php.ini /etc/php5/fpm/php.ini && \
- 		sed -i -e "s/^display_startup_errors\s*=.*/display_startup_errors = On/g" /etc/php5/apache2/php.ini /etc/php5/fpm/php.ini && \
- 		sed -i -e "s/^;*error_log\s*=\s*syslog/;#error_log = syslog/g" /etc/php5/apache2/php.ini /etc/php5/fpm/php.ini && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update -y
+RUN apt-get install -y python-software-properties
+RUN apt-get install -y software-properties-common
+RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
+RUN apt-get update -y
+RUN apt-get install -y apache2 php5.6 php5.6-sybase php5.6-odbc tdsodbc unixodbc freetds-dev php5.6-sybase
+RUN apt-get -y autoremove
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN a2enmod rewrite
 
-RUN /usr/sbin/a2enmod rewrite
-RUN php5enmod mssql
+#RUN /usr/sbin/a2enmod rewrite
+#RUN php5enmod mssql
 
-# Edit apache2.conf to change apache site settings.
+# Edita apache2.conf o php.ini para cambiar las config // php5.6-mbstring php5.6-mcrypt php5.6-xml php5.6-mssql
 ADD apache2.conf /etc/apache2/
+ADD php.ini /etc/php5/apache2/
 
-# Edit 000-default.conf to change apache site settings.
+# Edita 000-default.conf para cambiar las config del sitio
 ADD 000-default.conf /etc/apache2/sites-available/
 
-# Uncomment these two lines to fix "non-UTF8" chars encoding and time format problems
-# ADD freetds.conf /etc/freetds/
+# Descomenta estas lineas en el Archivo Docker para reparar errores con el UT8 de texto o tiempo:
+ADD freetds.conf /etc/freetds/
 # ADD locales.conf /etc/freetds/
 
 EXPOSE 80
