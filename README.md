@@ -25,9 +25,9 @@ docker run -d -p 8084:80 -v ruta_repo_local:/var/www/ lectorrss/docker-mssql-php
 docker ps
 ```
 
-### Conectare al servidor
+### Conectarse al servidor
 ```bash
-docker exec -it <container name> /bin/bash
+docker exec -it <nombre_contenedor> /bin/bash
 ```
 
 # Otros
