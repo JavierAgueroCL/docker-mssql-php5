@@ -6,7 +6,7 @@ RUN apt-get install -y python-software-properties
 RUN apt-get install -y software-properties-common
 RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 RUN apt-get update -y
-RUN apt-get install -y apache2 php5.6 php5.6-sybase php5.6-odbc tdsodbc unixodbc freetds-dev php5.6-sybase
+RUN apt-get install -y apache2 php5.6 php5.6-sybase php5.6-odbc tdsodbc unixodbc freetds-dev php5.6-sybase php5.6-xml
 RUN apt-get -y autoremove
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
