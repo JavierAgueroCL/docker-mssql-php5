@@ -17,7 +17,7 @@ RUN a2enmod rewrite
 
 # Edita apache2.conf o php.ini para cambiar las config // php5.6-mbstring php5.6-mcrypt php5.6-xml php5.6-mssql
 ADD apache2.conf /etc/apache2/
-ADD php.ini /etc/php5/apache2/
+ADD php.ini /etc/php/5.6/apache2/
 
 # Edita 000-default.conf para cambiar las config del sitio
 ADD 000-default.conf /etc/apache2/sites-available/
